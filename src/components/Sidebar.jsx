@@ -48,7 +48,7 @@ function Sidebar({
     budgetRange[0] > 0 || budgetRange[1] < 10000;
 
   return (
-    <aside className="w-72 bg-white border-r border-gray-200 p-6 h-screen overflow-y-auto sticky top-20">
+    <aside className="hidden md:block w-72 bg-white border-r border-gray-200 p-6 h-screen overflow-y-auto sticky top-20">
       {/* Clear Filters Button */}
       {hasActiveFilters && (
         <button
