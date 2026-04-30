@@ -1,6 +1,7 @@
 import { Search } from 'lucide-react';
 
-function Navbar() {
+// Props add kiye hain jo App.jsx se aayenge
+function Navbar({ searchQuery, onSearchChange, onMenuClick }) {
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,21 +17,28 @@ function Navbar() {
             </span>
           </div>
 
-          {/* Search Bar (Centered) */}
+          {/* Search Bar (Centered) - Desktop */}
           <div className="hidden md:flex flex-1 max-w-md relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="text"
               placeholder="Search jobs..."
+              value={searchQuery} // State se connect kiya
+              onChange={(e) => onSearchChange(e.target.value)} // Change handle kiya
               className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
             />
           </div>
 
           {/* Right Section: Mobile Filter & Buttons */}
           <div className="flex items-center gap-3">
-            {/* Mobile Filter Button (Visible only on mobile) */}
-            <button className="md:hidden flex items-center gap-2 bg-white border border-gray-300 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 active:bg-gray-100 transition">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+            {/* Mobile Filter Button - Ab ye Sidebar ko kholega */}
+            <button 
+              onClick={onMenuClick} // Click par sidebar open hoga
+              className="md:hidden flex items-center gap-2 bg-white border border-gray-300 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 active:bg-gray-100 transition"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+              </svg>
               <span>Filters</span>
             </button>
 
@@ -44,13 +52,15 @@ function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Search Bar (Only visible on small screens) */}
+        {/* Mobile Search Bar - Isko bhi connect kiya */}
         <div className="md:hidden pb-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
             <input
               type="text"
               placeholder="Search jobs..."
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
               className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none text-sm"
             />
           </div>
